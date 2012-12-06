@@ -209,10 +209,11 @@ Equivalent to (complement current-authentication)."}
   [])
 
 (defn throw-unauthorized
-  [identity authorization-info]
-  (throw+ (merge {::type :unauthorized
-                  ::identity identity}
-                 authorization-info)))
+  ([identity] (throw-unauthorized identity {}))
+  ([identity authorization-info]
+   (throw+ (merge {::type :unauthorized
+                   ::identity identity}
+                  authorization-info))))
 
 (defmacro authenticated
   "Macro that only allows the evaluation of the given body of code if the
